@@ -94,7 +94,7 @@ def display_hangman(tries):
 
 def hangman():
     #Set up an empty scoreboard that gets refeshed everytime the script is run
-    scoreboard  = pd.DataFrame(columns = ['Name','Score'])
+    scoreboard  = pd.DataFrame(columns = ['Name','Score', 'NumberOfTries'])
     
     while input("If you would like to play a game of hangman please type 'Y' ").upper() == "Y":
         
@@ -164,9 +164,10 @@ def hangman():
             if player_name in scoreboard.Name.values:
                 #if the player is already on the scoreboard, increase the score by 10
                 scoreboard.loc[scoreboard['Name']== player_name, 'Score'] += 10
+                scoreboard.loc[scoreboard['Name']== player_name, 'NumberOfTries'] += 1
             else:
                 #for a new player, add them to the scoreboard and give them a score of 10
-                scoreboard.loc[len(scoreboard)] = [player_name,10]
+                scoreboard.loc[len(scoreboard)] = [player_name,10,1]
             print(scoreboard)
         else:
             #if the game is lost, the scoreboard is not updated
